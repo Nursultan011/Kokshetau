@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "./components/_variables.scss";
+@import "./components/_globals.scss";
+@import "./components/_main.scss";
+@import "./components/_news.scss";
+@import "./components/_services.scss";
+@import "./components/_vacancy.scss";
+@import "./components/_contacts.scss";
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+	box-sizing: border-box;
+	scroll-behavior: smooth; 
+}
+
+body {
+	margin: 0;
+}
+
+.container {
+	max-width: 1280px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+  padding-right: 32px;
+  padding-left: 32px;
+}
+
+@media (max-width: 767px) {
+	.container {
+		max-width: 100%;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+}
