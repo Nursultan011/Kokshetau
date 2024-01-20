@@ -1,0 +1,133 @@
+.main{
+  &__inner{
+    padding: 64px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .content, & > img{
+      width: calc(50% - 16px);
+    }
+    &>img{
+      max-height: 640px;
+      object-fit: contain;
+      object-position: right;
+    }
+    .content{
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      h1{
+        margin: 0;
+        font-size: 36px;
+        color: $black-color;
+        line-height: 48px;
+        font-weight: 600;
+        span{
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+.about-block{
+  background: #F2F4F7;
+  &__inner{
+    padding: 96px 0;
+    .center{
+      .button{
+        padding: 0 24px;
+      }
+    }
+  }
+  &__cards{
+    margin-top: 23px;
+    padding: 64px;
+    background-image: url('@/assets/images/aboutBlockBg.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    .card{
+      border: 1px solid rgba(255, 255, 255, 0.60);
+      background: rgba(255, 255, 255, 0.30);
+      backdrop-filter: blur(12px);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0;
+      p{
+        margin: 0;
+        color: white;
+        font-size: 60px;
+        line-height: 72px;
+        letter-spacing: -1.2px;
+        font-weight: 600;
+      }
+      span{
+        display: block;
+        font-size: 18px;
+        color: white;
+        line-height: 28px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.enterprises{
+  background: #F2F4F7;
+  &__inner{
+    padding: 96px 0;
+  }
+  &__cards{
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__card{
+    width: calc(50% - 16px);
+    background: white;
+    padding: 32px;
+    .icon{
+      width: 96px;
+      height: 96px;
+      img,svg{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left;
+      }
+    }
+    .title{
+      font-size: 18px;
+      line-height: 28px;
+      font-weight: 600;
+    }
+  }
+}
+
+
+.banner{
+  padding: 96px 0;
+  &__inner{
+    background: #0A1433;
+    padding: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 70px;
+    .title{
+      flex: 1;
+      color: white;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 38px;
+    }
+    .button{
+      width: 250px;
+    }
+  }
+}

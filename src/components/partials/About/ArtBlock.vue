@@ -5,9 +5,9 @@
         <div class="art__block" v-for="(item, i) in arts" :key="i">
           <div class="content">
             <p class="title">{{ item.title }}</p>
-            <div class="art__description" v-html="item.description"></div>
+            <div class="description" v-html="item.description"></div>
           </div>
-          <img src="" alt="" />
+          <img src="../../../assets/images/artImg.jpg" alt="" />
         </div>
       </div>
     </div>

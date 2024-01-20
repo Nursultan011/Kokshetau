@@ -8,7 +8,15 @@
             class="enterprises__card"
             v-for="(item, i) in enterprises"
             :key="i"
-          ></div>
+          >
+            <div class="icon">
+              <img src="@/assets/images/enterprisesIcon.svg" alt="" />
+            </div>
+            <p class="title" v-if="item.title">
+              {{ item.title }}
+            </p>
+            <router-link class="button-txt" to="/">Подробнее</router-link>
+          </div>
         </div>
       </div>
     </div>

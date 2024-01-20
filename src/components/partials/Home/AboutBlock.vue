@@ -10,7 +10,9 @@
             Приветствуем вас в мире энергетики с ТОО 'Кокшетау Энерго' – вашим
             надежным партнером в обеспечении эффективной работы электросетей
           </p>
-          <button class="button">Подробнее</button>
+          <button class="button" v-if="route.path !== '/about'">
+            Подробнее
+          </button>
         </div>
         <div class="cards about-block__cards">
           <div class="card" v-for="(item, i) in cards" :key="i">
@@ -29,8 +31,11 @@
 
 <script>
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 export default {
   setup() {
+    const route = useRoute();
+
     const cards = ref([
       {
         title: "500+",
@@ -47,6 +52,7 @@ export default {
     ]);
 
     return {
+      route,
       cards,
     };
   },
