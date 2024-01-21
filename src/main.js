@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './styles/index.scss'
+import VueSplide from '@splidejs/vue-splide';
+import '@splidejs/splide/dist/css/splide.min.css';
 import store from './store'
 
-createApp(App).use(store).use(router).mount('#app')
+createApp(App).use(store).use(router).use(VueSplide).mount('#app')
