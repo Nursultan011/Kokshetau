@@ -48,3 +48,15 @@
     }
   }
 }
+
+@media (max-width: 767px){
+  .contacts{
+    &__header{
+      padding: 48px 0;
+      .title{
+        font-size: 36px;
+        line-height: 44px;
+      }
+    }
+  }
+}

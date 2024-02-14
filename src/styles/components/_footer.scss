@@ -107,3 +107,13 @@
     }
   }
 }
+
+@media (max-width: 767px){
+  .footer{
+    &__list{
+      ul{
+        width: 100%;
+      }
+    }
+  }
+}

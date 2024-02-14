@@ -238,3 +238,171 @@
     }
   }
 }
+
+@media (min-width: 992px) and (max-width: 1199px){
+
+  .main{
+    &__inner{
+      .content{
+        h1{
+          font-size: 32px;
+          line-height: 42px;
+        }
+      }
+    }
+  }
+
+  .main-news{
+    padding-top: 64px;
+    padding-bottom: 130px;
+  }
+
+  .about-block{
+    &__inner{
+      padding: 64px 0;
+    }
+    &__cards{
+      .card{
+        p{
+          font-size: 44px;
+          line-height: 46px;
+        }
+      }
+    }
+  }
+
+  .enterprises{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .banner{
+    padding: 64px 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+
+  .main{
+    &__inner{
+      .content{
+        h1{
+          font-size: 28px;
+          line-height: 36px;
+        }
+        .description{
+          font-size: 18px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+
+  .main-news{
+    padding-top: 64px;
+    padding-bottom: 130px;
+  }
+
+  .about-block{
+    &__inner{
+      padding: 64px 0;
+    }
+    &__cards{
+      padding: 24px;
+      .card{
+        padding: 16px;
+        p{
+          font-size: 32px;
+          line-height: 38px;
+        }
+        span{
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .enterprises{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .banner{
+    padding: 64px 0;
+    &__inner{
+      padding: 40px;
+      gap: 32px;
+      .button{
+        width: 220px;
+      }
+      .title{
+        font-size: 28px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px){
+  .main{
+    &__inner{
+      flex-direction: column;
+      .content, & > img{
+        width: 100%;
+        max-width: 580px;
+      }
+      & > img{
+        margin-top: 32px;
+      }
+      .content{
+        h1{
+          font-size: 32px;
+          line-height: 40px;
+        }
+        .description{
+          font-size: 18px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+
+  .about-block{
+    &__cards{
+      margin-top: 48px;
+      padding: 32px 24px;
+      .card{
+        & + .card{
+         margin-top: 32px;
+        }
+        p{
+          font-size: 48px;
+          line-height: 56px;
+        }
+      }
+    }
+  }
+
+  .enterprises{
+    &__card{
+      width: 100%;
+    }
+  }
+
+  .banner{
+    padding: 64px 0;
+    &__inner{
+      padding: 40px 24px;
+      gap: 32px;
+      flex-direction: column;
+      .button{
+        width: 100%;
+      }
+      .title{
+        font-size: 30px;
+      }
+    }
+  }
+}

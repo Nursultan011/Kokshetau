@@ -118,3 +118,56 @@
     }
   }
 }
+
+@media (min-width: 992px) and (max-width: 1199px){
+
+  .advantages{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .art{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .licenses-block{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .maps{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+  .advantages{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .art{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .licenses-block{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+
+  .maps{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+}

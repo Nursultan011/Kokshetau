@@ -37,3 +37,25 @@
     }
   }
 }
+
+@media (max-width: 767px){
+  .services{
+    &__header{
+      flex-direction: column;
+      margin: 48px 0;
+      .title{
+        font-size: 36px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px){
+  .services{
+    &__header{
+      .button{
+        width: 100%;
+      }
+    }
+  }
+}

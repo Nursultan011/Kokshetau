@@ -36,17 +36,17 @@
                 <span>{{$t('subsidiary')}}</span>
               </li>
               <li>
-                <router-link to="/">
+                <!-- <router-link to="/">
                   Выдача ТУ и подключение к сети
-                </router-link>
+                </router-link> -->
               </li>
               <li>
-                <router-link to="/">
+                <!-- <router-link to="/">
                   Информация о запланированных прекращениях эл. энергии
-                </router-link>
+                </router-link> -->
               </li>
               <li>
-                <router-link to="/"> Полугодовой отчет </router-link>
+                <!-- <router-link to="/"> Полугодовой отчет </router-link> -->
               </li>
             </ul>
             <ul>

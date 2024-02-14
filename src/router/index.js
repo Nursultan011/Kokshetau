@@ -32,6 +32,11 @@ const routes = [
     component: () => import('../pages/procurement.vue')
   },
   {
+    path: '/subsidiary/:id',
+    name: 'subsidiary',
+    component: () => import('../pages/subsidiary.vue')
+  },
+  {
     path: '/vacancy',
     name: 'vacancy',
     component: () => import('../pages/vacancy.vue')

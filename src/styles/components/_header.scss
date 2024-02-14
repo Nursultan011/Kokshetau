@@ -107,3 +107,41 @@
     gap: 24px;
   }
 }
+
+@media (max-width: 1199px){
+  .header{
+    &__inner{
+      padding: 16px 0;
+      nav{
+        display: none;
+      }
+      .burger-menu{
+        display: block;
+        width: 24px;
+        height: 24px;
+      }
+    }
+    &__flex{
+      gap: 20px;
+    }
+  }
+}
+
+@media (max-width: 767px){
+  .header{
+    border-bottom: 1px solid #EAECF0;
+    &__inner{
+      .emblem{
+        width: 30px;
+        height: 30px;
+      }
+      .logo{
+        max-width: 128px;
+        max-height: 32px;
+        img{
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}

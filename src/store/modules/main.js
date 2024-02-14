@@ -8,10 +8,10 @@ const state = {
   vacancies: null,
   contacts: null,
   news: null,
+  subsidiary: null,
 };
 
-const getters = {
-};
+const getters = {};
 
 const actions = {
   async getMain({ commit }) {
@@ -39,6 +39,21 @@ const actions = {
 
       if (response.data) {
         commit('setAbout', response.data);
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log('Ошибка', error);
+      throw error;
+    }
+  },
+  async getSubsidiaryId({ commit }, id) {
+    try {
+      axiosInstance.defaults.headers.common['Accept-Language'] = localStorage.getItem('lang') || 'ru';
+
+      const response = await axiosInstance.get('subsidiary/' + id);
+
+      if (response.data) {
+        commit('setSubsidiary', response.data);
         console.log(response.data);
       }
     } catch (error) {
@@ -139,6 +154,9 @@ const mutations = {
   },
   setNews(state, data) {
     state.news = data;
+  },
+  setSubsidiary(state, data){
+    state.subsidiary = data;
   }
 };
 
