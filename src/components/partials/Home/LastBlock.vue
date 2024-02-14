@@ -3,10 +3,9 @@
     <div class="container">
       <div class="banner__inner">
         <p class="title">
-          Получить технические условия региональной энергетической комиссии
-          онлайн
+          {{ $t('last_block_title') }}
         </p>
-        <button class="button">Получить</button>
+        <button class="button">{{$t('get')}}</button>
       </div>
     </div>
   </section>

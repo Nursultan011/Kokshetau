@@ -1,32 +1,39 @@
 <template>
-  <section class="contacts">
+  <loader v-if="isLoading" />
+  <section v-else class="contacts">
     <div class="container">
       <div class="contacts__inner">
-        <div class="contacts__header">
-          <p class="title">Контакты</p>
-          <input class="search" type="search" placeholder="Поиск" />
+        <div class="contacts__header" v-if="contacts && contacts.content">
+          <p class="title" v-if="contacts.content.title">
+            {{ contacts.content.title }}
+          </p>
+          <!-- <input class="search" type="search" placeholder="Поиск" /> -->
         </div>
-        <div class="cards contacts__cards">
-          <div class="card card-border" v-for="(item, i) in contacts" :key="i">
+        <div class="cards contacts__cards" v-if="contacts && contacts.value">
+          <div
+            class="card card-border"
+            v-for="(item, i) in contacts.value"
+            :key="i"
+          >
             <p class="title">
               {{ item.title }}
             </p>
             <ul>
-              <li v-if="item.location">
+              <li v-if="item.address">
                 <img src="@/assets/images/location.svg" alt="" />
-                <span>{{ item.location }}</span>
+                <span>{{ item.address }}</span>
               </li>
-              <li v-if="item.name">
+              <li v-if="item.contact_name">
                 <img src="@/assets/images/user.svg" alt="" />
-                <span>{{ item.name }}</span>
+                <span>{{ item.contact_name }}</span>
               </li>
-              <li v-if="item.email">
+              <li v-if="item.contact_email">
                 <img src="@/assets/images/mail.svg" alt="" />
-                <span>{{ item.email }}</span>
+                <span>{{ item.contact_email }}</span>
               </li>
-              <li v-if="item.phone">
+              <li v-if="item.contact_phone">
                 <img src="@/assets/images/phone.svg" alt="" />
-                <span>{{ item.phone }}</span>
+                <span>{{ item.contact_phone }}</span>
               </li>
             </ul>
           </div>
@@ -37,62 +44,27 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { useStore } from "vuex";
+import Loader from '@/components/global/Loader.vue';
+
 export default {
+  components: { Loader },
   setup() {
-    const contacts = ref([
-      {
-        title: 'ТОО "Кокшетау Энерго"',
-        location: "г.Кокшетау, мкр.Центральный, 5",
-        name: "Аралбаев Досымхан Алишевич",
-        email: "tookenergo@mail.ru",
-        phone: "8-716-2-422936",
-      },
-      {
-        title: "Кокшетауские городские ЭС",
-        location: "г.Кокшетау, ул.Кенесары89а",
-        name: "Усембаев Данияр Абусагитович",
-        email: "gorset2014@mail.ru",
-        phone: "8-716-2-26-48-12",
-      },
-      {
-        title: 'ТОО "Кокшетау Энерго"',
-        location: "г.Щучинск, ул.Энергетиков 21",
-        name: "Аралбаев Досымхан Алишевич",
-        email: "vostok_mes@mail.ru",
-        phone: "8-716-36-55032",
-      },
-      {
-        title: 'ТОО "Кокшетау Энерго"',
-        location: "г.Кокшетау, мкр.Центральный, 5",
-        name: "Аралбаев Досымхан Алишевич",
-        email: "tookenergo@mail.ru",
-        phone: "8-716-2-422936",
-      },
-      {
-        title: "Кокшетауские городские ЭС",
-        location: "г.Кокшетау, ул.Кенесары89а",
-        name: "Усембаев Данияр Абусагитович",
-        email: "gorset2014@mail.ru",
-        phone: "8-716-2-26-48-12",
-      },
-      {
-        title: 'ТОО "Кокшетау Энерго"',
-        location: "г.Щучинск, ул.Энергетиков 21",
-        name: "Аралбаев Досымхан Алишевич",
-        email: "vostok_mes@mail.ru",
-        phone: "8-716-36-55032",
-      },
-      {
-        title: 'ТОО "Кокшетау Энерго"',
-        location: "г.Щучинск, ул.Энергетиков 21",
-        name: "Аралбаев Досымхан Алишевич",
-        email: "vostok_mes@mail.ru",
-        phone: "8-716-36-55032",
-      },
-    ]);
+    const store = useStore();
+    const isLoading = ref(true);
+
+    const contacts = computed(() => store.state.main.contacts.data);
+
+    onMounted(async () => {
+      await store.dispatch("main/getContacts").then((res) => {
+        isLoading.value = false;
+      });
+    });
 
     return {
+      store,
+      isLoading,
       contacts,
     };
   },

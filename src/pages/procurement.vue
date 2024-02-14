@@ -5,8 +5,8 @@
       <div class="services__inner">
         <div class="services__header" v-if="services && services.content">
           <div class="content">
-            <p class="title" v-if="services.content.title">
-              {{ services.content.title }}
+            <p class="title">
+            {{ $t('procurement') }}
             </p>
             <p class="description" v-if="services.content.description">
               {{ services.content.description }}
@@ -63,20 +63,10 @@ export default {
       });
     });
 
-    const formData = ref({
-      name: "",
-      surname: "",
-      email: "",
-      phone: "",
-      position: "",
-      letter: ""
-    })
-
     return {
       store,
       isLoading,
       services,
-      formData
     };
   },
 };

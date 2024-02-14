@@ -6,32 +6,27 @@
           <h2
             class="title"
             v-if="
-              $props.about &&
-              $props.about.content &&
-              $props.about.content.title
+              $props.home &&
+              $props.home.title
             "
           >
-            {{ $props.about.content.title }}
+            {{ $props.home.title }}
           </h2>
           <p
             class="description"
             v-if="
-              $props.about &&
-              $props.about.content &&
-              $props.about.content.description
+              $props.home &&
+              $props.home.description
             "
           >
-            {{ $props.about.content.description }}
+            {{ $props.home.description }}
           </p>
-          <router-link style="text-decoration: none;" to="/about" class="button" v-if="route.path !== '/about'">
-            {{$t('more')}}
-          </router-link>
         </div>
         <div
           class="cards about-block__cards"
-          v-if="$props.about && $props.about.performance"
+          v-if="$props.performance"
         >
-          <div class="card" v-for="(item, i) in $props.about.performance" :key="i">
+          <div class="card" v-for="(item, i) in $props.performance" :key="i">
             <p>
               {{ item.title }}
             </p>
@@ -51,7 +46,7 @@ import { useRoute } from "vue-router";
 import { getIcon } from "@/helpers/imageUrl";
 
 export default {
-  props: ["about"],
+  props: ["home", "performance"],
   setup(props) {
     const route = useRoute();
 

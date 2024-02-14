@@ -1,10 +1,10 @@
 <template>
-  <section class="news-slider">
+  <section class="news-slider main-news">
     <div class="container">
       <div class="news-slider__inner">
         <div class="news-slider__header">
-          <p class="title">Новости компании</p>
-          <button class="button">Посмотреть все</button>
+          <p class="title">{{$t('company_news')}}</p>
+          <button @click="redirect('/news')" class="button">{{$t('view_all')}}</button>
         </div>
         <Splide
           :options="{
@@ -27,14 +27,14 @@
         >
           <SplideSlide
             class="news__cards"
-            v-for="(item, index) in news"
+            v-for="(item, index) in $props.news"
             :key="index"
           >
-            <div class="card" :key="i" @click="redirect(item.id)">
+            <div class="card" :key="i" @click="redirect('news/' + item.id)">
               <div class="img">
-                <img src="@/assets/images/news.jpg" alt="" />
+                <img v-if="item.img_uri" :src="getImg(item.img_uri)" alt="" />
               </div>
-              <p class="suptitle" v-if="item.date">{{ item.date }}</p>
+              <p class="suptitle" v-if="item.created_at">{{ item.created_at }}</p>
               <div class="flex" v-if="item.title">
                 <p class="title">{{ item.title }}</p>
                 <svg
@@ -53,8 +53,7 @@
                   />
                 </svg>
               </div>
-              <p class="description" v-if="item.description">
-                {{ item.description }}
+              <p class="description" v-html="item.content">
               </p>
             </div>
           </SplideSlide>
@@ -66,49 +65,22 @@
 
 <script>
 import { computed, ref } from "vue";
+import { getImg } from "@/helpers/imageUrl";
+import { useRouter } from 'vue-router';
 
 export default {
-  setup() {
-    const news = ref([
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-    ]);
+  props: ['news'],
+  setup(props) {
+    const router = useRouter();
+
+    const redirect = (event) => {
+      router.push(event)
+    }
 
     return {
-      news,
+      router,
+      redirect,
+      getImg,
     };
   },
 };

@@ -1,8 +1,9 @@
 <template>
-  <section class="news">
+  <Loader v-if="isLoading"></Loader>
+  <section v-else class="news">
     <div class="container">
       <div class="news__inner">
-        <p class="title">Новости</p>
+        <p class="title">{{$t('news')}}</p>
         <div class="cards news__cards">
           <div
             class="card"
@@ -11,9 +12,9 @@
             @click="redirect(item.id)"
           >
             <div class="img">
-              <img src="@/assets/images/news.jpg" alt="" />
+              <img v-if="item.img_uri" :src="getImg(item.img_uri)" alt="" />
             </div>
-            <p class="suptitle" v-if="item.date">{{ item.date }}</p>
+            <p class="suptitle" v-if="item.created_at">{{ item.created_at }}</p>
             <div class="flex" v-if="item.title">
               <p class="title">{{ item.title }}</p>
               <svg
@@ -32,8 +33,7 @@
                 />
               </svg>
             </div>
-            <p class="description" v-if="item.description">
-              {{ item.description }}
+            <p class="description" v-html="item.content">
             </p>
           </div>
         </div>
@@ -43,58 +43,40 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-export default {
-  setup() {
-    const router = useRouter();
+import { useStore } from 'vuex';
+import { getImg } from "@/helpers/imageUrl";
+import Loader from "@/components/global/Loader.vue";
 
-    const news = ref([
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-      {
-        id: 1,
-        date: "20 Jan 2022",
-        title: "Қымбатты энергетик - әріптестер!",
-        description:
-          "Энергетиктер мерекесімен құттықтауды қабыл алыңыздар! Энергетик күні - біздің кәсіби мерекеміз. Энергетика – Ел экономиканыңең маңызды саласы. Бұл сала отанымыздың экономикасының флагманы болып табылады, сондықтан әрқашан энергетика саласындағы әріптестер жоғары құрметке және жоғары қоғамдық мәртебеге ие. Бұл салада жоғары білікті мамандардың қызмет атқаратыны белгілі.",
-      },
-    ]);
+export default {
+  components: {
+    Loader
+  },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const isLoading = ref(true);
+
+    const news = computed(() => store.state.main.news.data.news);
 
     const redirect = (id) => {
       if (id) router.push({ path: "/news/" + id });
     };
 
+    onMounted(async () => {
+      await store.dispatch("main/getNews").then((res) => {
+        isLoading.value = false;
+      });
+    });
+
     return {
+      store,
       router,
       news,
       redirect,
+      isLoading,
+      getImg
     };
   },
 };

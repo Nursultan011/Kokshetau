@@ -65,6 +65,7 @@
         line-height: 72px;
         letter-spacing: -1.2px;
         font-weight: 600;
+        text-align: center;
       }
       span{
         display: block;
@@ -72,6 +73,7 @@
         color: white;
         line-height: 28px;
         font-weight: 600;
+        text-align: center;
       }
     }
   }
@@ -91,14 +93,14 @@
     }
     .splide__arrows{
       .splide__arrow--prev{
-        left: calc(1232px - 120px);
+        left: 10px;
       }
       .splide__arrow--next{
-        right: auto;
-        left: calc(1232px - 48px);
+        left: calc(34px + 48px);
       }
       .splide__arrow{
-        top: -70px;
+        top: auto;
+        bottom: -100px;
         width: 48px;
         height: 48px;
         background: white;
@@ -118,6 +120,11 @@
       position: relative;
       overflow: hidden;
       margin: 0 16px;
+      .description{
+        p{
+          margin: 0;
+        }
+      }
     }
   }
   &__header{
@@ -133,6 +140,10 @@
 
 }
 
+.main-news{
+  padding-bottom: 160px;
+}
+
 .enterprises{
   background: #F2F4F7;
   &__inner{
@@ -142,6 +153,8 @@
     margin-top: 48px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
   }
   &__card{
     width: calc(50% - 16px);
@@ -161,6 +174,44 @@
       font-size: 18px;
       line-height: 28px;
       font-weight: 600;
+      margin-top: 20px;
+      color: #101828;
+    }
+    .txt{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 0 0 0;
+      color: #101828;
+      svg{
+        min-width: 24px;
+        width: 24px;
+        max-width: 24px;
+        min-height: 24px;
+        max-height: 24px;
+        height: 24px;
+      }
+    }
+    .descr{
+      color: #101828;
+      margin-top: 16px;
+      p{
+        color: #101828;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 26px;
+        margin: 0;
+      }
+      ul{
+        padding-left: 15px;
+        margin: 4px 0 20px 0;
+        li{
+          color: #475467;
+          font-size: 16px;
+          line-height: 24px;
+          font-weight: 400;
+        }
+      }
     }
   }
 }

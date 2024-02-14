@@ -1,18 +1,22 @@
 <template>
-  <section class="vacancy">
+   <loader v-if="isLoading" />
+  <section v-else class="vacancy">
     <div class="container">
       <div class="vacancy__inner">
-        <div class="content">
-          <p class="title">Вакансии</p>
-          <p class="description">
-            Присоединяйтесь к команде ТОО "Кокшетау Энерго" — ведущему
-            региональному поставщику энергетических услуг, где ваш талант найдет
-            возможность влиять на энергетическую стабильность региона.
+        <div class="content" v-if="vacancies && vacancies.content">
+          <p class="title" v-if="vacancies.content.title">
+            {{ vacancies.content.title }}
           </p>
-          <div class="vacancy__cards">
-            <div class="vacancy__card" v-for="(item, i) in vacancies" :key="i">
-              <p class="vacancy__title">{{ item.position }}</p>
-              <p class="vacancy__description">{{ item.description }}</p>
+          <p class="description"  v-if="vacancies.content.description">
+            {{ vacancies.content.description }}
+          </p>
+          <div class="vacancy__cards" v-if="vacancies && vacancies.value">
+            <div class="vacancy__card" v-for="(item, i) in vacancies.value" :key="i">
+              <p class="vacancy__title" v-if="item.title">{{ item.title }}</p>
+              <p class="vacancy__description" v-if="item.description" v-html="item.description"></p>
+              <p class="vacancy__description" v-if="item.salary">
+                {{ item.salary }}
+              </p>
               <ul>
                 <li v-if="item.location">
                   <svg
@@ -39,7 +43,7 @@
                   </svg>
                   <span>{{ item.location }}</span>
                 </li>
-                <li v-if="item.expirence">
+                <li v-if="item.experience">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -62,51 +66,54 @@
                       </clipPath>
                     </defs>
                   </svg>
-                  <span>{{ item.expirence }}</span>
+                  <span>{{ item.experience }}</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <form action="" class="form">
+        <form @submit.prevent="send" class="form">
           <div class="two">
             <div class="text-field">
-              <label for="">Имя</label>
-              <input required type="text" placeholder="Аскар" />
+              <label for="name">{{ $t('name') }}</label>
+              <input id="name" v-model="formData.name" required type="text" placeholder="Аскар" />
             </div>
             <div class="text-field">
-              <label for="">Фамилия</label>
-              <input required type="text" placeholder="Аскаров" />
+              <label for="surname">{{$t('surname')}}</label>
+              <input id="surname" v-model="formData.surname" required type="text" placeholder="Аскаров" />
             </div>
             <div class="text-field">
-              <label for="">Email</label>
-              <input required type="email" placeholder="you@company.com" />
+              <label for="email">Email</label>
+              <input id="email" v-model="formData.email" required type="email" placeholder="you@company.com" />
             </div>
             <div class="text-field">
-              <label for="">Номер телефона</label>
-              <input required type="email" placeholder="+1 (555) 000-0000" />
+              <label for="phone">{{$t('mobile_number')}}</label>
+              <input id="phone" v-model="formData.phone" required type="tel" placeholder="+1 (555) 000-0000" />
             </div>
           </div>
           <div class="text-field">
-            <label for="">Желаемая позиция</label>
+            <label for="position">{{$t('position')}}</label>
             <input
               required
-              type="email"
-              placeholder="Введите желаемую позицию"
+              id="position"
+              type="text"
+              :placeholder="$t('position_placeholder')"
+              v-model="formData.position"
             />
           </div>
           <div class="text-field">
-            <label for="">Сопроводительное письмо</label>
+            <label for="letter">{{$t('letter')}}</label>
             <textarea
               name=""
-              id=""
+              id="letter"
               cols="30"
               rows="10"
-              placeholder="Напишите..."
+              :placeholder="$t('letter_placeholder')"
               required
+              v-model="formData.letter"
             ></textarea>
           </div>
-          <button class="button">Отправить</button>
+          <button type="submit" class="button">{{ $t('send') }}</button>
         </form>
       </div>
     </div>
@@ -114,56 +121,60 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { useStore } from 'vuex';
+import Loader from '@/components/global/Loader.vue';
+
 export default {
+  components: {
+    Loader
+  },
   setup() {
-    const vacancies = ref([
-      {
-        position: "Инженер радиосвязи",
-        description: "Образование высшее-техническое",
-        location: "Кокшетау",
-        expirence: "Стаж не менее 5 лет",
-      },
-      {
-        position: "Инженер радиосвязи",
-        description: "Образование высшее-техническое",
-        location: "Кокшетау",
-        expirence: "Стаж не менее 5 лет",
-      },
-      {
-        position: "Инженер радиосвязи",
-        description: "Образование высшее-техническое",
-        location: "Кокшетау",
-        expirence: "Стаж не менее 5 лет",
-      },
-      {
-        position: "Инженер радиосвязи",
-        description: "Образование высшее-техническое",
-        location: "Кокшетау",
-        expirence: "Стаж не менее 5 лет",
-      },
-      {
-        position: "Инженер радиосвязи",
-        description: "Образование высшее-техническое",
-        location: "Кокшетау",
-        expirence: "Стаж не менее 5 лет",
-      },
-      {
-        position: "Инженер радиосвязи",
-        description: "Образование высшее-техническое",
-        location: "Кокшетау",
-        expirence: "Стаж не менее 5 лет",
-      },
-      {
-        position: "Инженер радиосвязи",
-        description: "Образование высшее-техническое",
-        location: "Кокшетау",
-        expirence: "Стаж не менее 5 лет",
-      },
-    ]);
+    const store = useStore();
+    const isLoading = ref(true);
+
+    const vacancies = computed(() => store.state.main.vacancies.data);
+
+    onMounted(async () => {
+      await store.dispatch("main/getVacancies").then((res) => {
+        isLoading.value = false;
+      });
+    });
+
+    const formData = ref({
+      name: "",
+      surname: "",
+      email: "",
+      phone: "",
+      position: "",
+      letter: ""
+    })
+
+    const send = async() => {
+      isLoading.value = true;
+
+      await store.dispatch("main/sendVacancy", formData.value).then((res) => {
+        formData.value = {
+          name: "",
+          surname: "",
+          email: "",
+          phone: "",
+          position: "",
+          letter: ""
+        };
+
+        isLoading.value = false;
+      }).catch((err) => {
+        isLoading.value = false;
+      })
+    }
 
     return {
+      store,
+      isLoading,
       vacancies,
+      formData,
+      send
     };
   },
 };

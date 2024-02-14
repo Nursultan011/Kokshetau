@@ -2,18 +2,32 @@
   <section class="advantages">
     <div class="container">
       <div class="advantages__inner">
-        <div class="center">
-          <p class="title">Наши Преимущества</p>
+        <div
+          class="center"
+          v-if="
+            $props.advantages &&
+            $props.advantages.title &&
+            $props.advantages.title.title
+          "
+        >
+          <p class="title">{{ $props.advantages.title.title }}</p>
         </div>
-        <div class="cards advantages__cards">
-          <div class="card" v-for="(item, i) in advantages" :key="i">
-            <div class="icon">
-              {{ item.icon }}
+        <div
+          class="cards advantages__cards"
+          v-if="$props.advantages && $props.advantages.content"
+        >
+          <div
+            class="card"
+            v-for="(item, i) in $props.advantages.content"
+            :key="i"
+          >
+            <div class="icon" v-if="item.ico_uri">
+              <img :src="getIcon(item.ico_uri)" alt="" />
             </div>
-            <p class="title">
+            <p class="title" v-if="item.title">
               {{ item.title }}
             </p>
-            <p class="description">
+            <p class="description" v-if="item.description">
               {{ item.description }}
             </p>
           </div>
@@ -25,31 +39,13 @@
 
 <script>
 import { ref } from "vue";
+import { getIcon } from "@/helpers/imageUrl";
 export default {
+  props: ["advantages"],
   setup() {
-    const advantages = ref([
-      {
-        icon: "",
-        title: "Техническая Экспертиза",
-        description:
-          "Обладая опытом и навыками, мы занимаемся обслуживанием электрических сетей напряжением 0,4-110 кВ, обеспечивая стабильность и надежность энергоснабжения.",
-      },
-      {
-        icon: "",
-        title: "Полный Цикл Услуг",
-        description:
-          "От покупки, транспортировки и распределения электроэнергии до предоставления услуг по ремонту средств электроизмерения и подстанций – мы охватываем полный цикл энергетических решений.",
-      },
-      {
-        icon: "",
-        title: "Профессионализм и Гарантии",
-        description:
-          "Владея лицензиями и обладая более чем двадцатилетним опытом, мы гарантируем высший стандарт качества и безопасности.",
-      },
-    ]);
 
     return {
-      advantages,
+      getIcon
     };
   },
 };
