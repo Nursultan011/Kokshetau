@@ -8,6 +8,7 @@ const state = {
   vacancies: null,
   contacts: null,
   news: null,
+  news_id: null,
   subsidiary: null,
 };
 
@@ -134,6 +135,21 @@ const actions = {
       throw error;
     }
   },
+  async getNewsById({ commit } , id) {
+    try {
+      axiosInstance.defaults.headers.common['Accept-Language'] = localStorage.getItem('lang') || 'ru';
+
+      const response = await axiosInstance.get('news/' + id);
+
+      if (response.data) {
+        commit('setNewsById', response.data);
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log('Ошибка', error);
+      throw error;
+    }
+  }
 };
 
 const mutations = {
@@ -154,6 +170,9 @@ const mutations = {
   },
   setNews(state, data) {
     state.news = data;
+  },
+  setNewsById(state, data) {
+    state.news_id = data;
   },
   setSubsidiary(state, data){
     state.subsidiary = data;

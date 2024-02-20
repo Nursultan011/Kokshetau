@@ -1,6 +1,8 @@
 <template>
   <the-header />
-  <router-view />
+  <div id="content-page">
+    <router-view />
+  </div>
   <the-footer />
 </template>
 
