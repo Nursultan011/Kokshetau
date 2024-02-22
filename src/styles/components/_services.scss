@@ -38,6 +38,31 @@
   }
 }
 
+.tenders__cards{
+  justify-content: space-between;
+  .card{
+    text-decoration: none;
+    color: $black-color;
+    width: calc(50% - 16px);
+    margin-right: 0 !important;
+    display: flex;
+    flex-direction: column;
+    ul{
+      flex: 1;
+      li{
+        span{
+          color: $black-color;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  .name{
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
 @media (max-width: 767px){
   .services{
     &__header{
@@ -46,6 +71,15 @@
       .title{
         font-size: 36px;
       }
+    }
+  }
+
+  .tenders__cards{
+    justify-content: space-between;
+    .card{
+      text-decoration: none;
+      color: $black-color;
+      width: 100%;
     }
   }
 }

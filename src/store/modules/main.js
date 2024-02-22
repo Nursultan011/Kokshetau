@@ -10,6 +10,7 @@ const state = {
   news: null,
   news_id: null,
   subsidiary: null,
+  tenders: null
 };
 
 const getters = {};
@@ -149,6 +150,21 @@ const actions = {
       console.log('Ошибка', error);
       throw error;
     }
+  },
+  async getTenders({ commit }) {
+    try {
+      axiosInstance.defaults.headers.common['Accept-Language'] = localStorage.getItem('lang') || 'ru';
+
+      const response = await axiosInstance.get('tenders/');
+
+      if (response.data) {
+        commit('setTenders', response.data);
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log('Ошибка', error);
+      throw error;
+    }
   }
 };
 
@@ -176,6 +192,9 @@ const mutations = {
   },
   setSubsidiary(state, data){
     state.subsidiary = data;
+  },
+  setTenders(state, data){
+    state.tenders = data;
   }
 };
 

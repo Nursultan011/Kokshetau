@@ -1,7 +1,7 @@
 <template>
   <Loader v-if="isLoading"></Loader>
   <div v-else>
-    <main-block />
+    <main-block :main="main.first_block" />
     <about-block :about="main.about" />
     <news-block :news='main.news' />
     <enterprises :subsidiary="main.subsidiaries" />
