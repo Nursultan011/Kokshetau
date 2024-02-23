@@ -38,15 +38,18 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import Loader from "@/components/global/Loader.vue";
+import { useI18n } from "vue-i18n";
 
 export default {
   components: { Loader },
   setup() {
     const store = useStore();
     const isLoading = ref(true);
+
+    const { locale } = useI18n({ useScope: "global" });
 
     const tenders = computed(() => store.state.main.tenders.data);
 
@@ -62,6 +65,14 @@ export default {
       // Возвращаем форматированную строку даты
       return date.toLocaleDateString('ru-RU'); // Используйте нужную локаль
     }
+
+    watch(locale, async (val) => {
+      isLoading.value = true;
+
+      await store.dispatch("main/getTenders").then((res) => {
+        isLoading.value = false;
+      });
+    });
 
     return {
       store,

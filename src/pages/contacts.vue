@@ -44,9 +44,10 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import Loader from '@/components/global/Loader.vue';
+import { useI18n } from "vue-i18n";
 
 export default {
   components: { Loader },
@@ -54,9 +55,19 @@ export default {
     const store = useStore();
     const isLoading = ref(true);
 
+    const { locale } = useI18n({ useScope: "global" });
+
     const contacts = computed(() => store.state.main.contacts.data);
 
     onMounted(async () => {
+      await store.dispatch("main/getContacts").then((res) => {
+        isLoading.value = false;
+      });
+    });
+
+    watch(locale, async (val) => {
+      isLoading.value = true;
+
       await store.dispatch("main/getContacts").then((res) => {
         isLoading.value = false;
       });

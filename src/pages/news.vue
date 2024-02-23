@@ -43,11 +43,12 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from 'vuex';
 import { getImg } from "@/helpers/imageUrl";
 import Loader from "@/components/global/Loader.vue";
+import { useI18n } from "vue-i18n";
 
 export default {
   components: {
@@ -58,6 +59,8 @@ export default {
     const router = useRouter();
     const isLoading = ref(true);
 
+    const { locale } = useI18n({ useScope: "global" });
+
     const news = computed(() => store.state.main.news.data.news);
 
     const redirect = (id) => {
@@ -65,6 +68,14 @@ export default {
     };
 
     onMounted(async () => {
+      await store.dispatch("main/getNews").then((res) => {
+        isLoading.value = false;
+      });
+    });
+
+    watch(locale, async (val) => {
+      isLoading.value = true;
+
       await store.dispatch("main/getNews").then((res) => {
         isLoading.value = false;
       });

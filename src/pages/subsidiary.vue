@@ -1,7 +1,24 @@
 <template>
   <loader v-if="isLoading" />
   <div v-else>
-    {{ subsidiary }}
+    <section class="sub">
+      <div class="container">
+        <div class="sub__inner">
+          <h1 class="title">
+            Для потребителя
+          </h1>
+          <div class="sub__content">
+            <div class="sub__nav">
+              <ul>
+                <li v-for="(category, index) in Object.values(subsidiary)">
+                  {{ category.title.title }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 

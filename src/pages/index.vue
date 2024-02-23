@@ -16,17 +16,29 @@ import NewsBlock from "@/components/partials/Home/NewsBlock.vue";
 import Enterprises from "@/components/partials/Home/Enterprises.vue";
 import LastBlock from "@/components/partials/Home/LastBlock.vue";
 import { useStore } from "vuex";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import Loader from "@/components/global/Loader.vue";
+import { useI18n } from "vue-i18n";
+
 export default {
   components: { MainBlock, AboutBlock, NewsBlock, Enterprises, LastBlock, Loader },
   setup() {
     const store = useStore();
     const isLoading = ref(true);
 
+    const { locale } = useI18n({ useScope: "global" });
+
     const main = computed(() => store.state.main.main.data);
 
     onMounted(async () => {
+      await store.dispatch("main/getMain").then((res) => {
+        isLoading.value = false;
+      });
+    });
+
+    watch(locale, async (val) => {
+      isLoading.value = true;
+
       await store.dispatch("main/getMain").then((res) => {
         isLoading.value = false;
       });
