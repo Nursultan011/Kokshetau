@@ -16,6 +16,11 @@
               {{ item.name }}
             </p>
             <div v-if="item.description">{{ item.description }}</div>
+            <div class="flex-1">
+              <p>Дата начала: {{ formatDate(item.date_begin) }}</p>
+              <p>Дата окончания: {{ formatDate(item.date_end) }}</p>
+              <p>Дата окончания торгов: {{ formatDate(item.date_trade_end) }}</p>
+            </div>
             <ul>
               <li>
                 <span>Условия оплаты:</span> {{ item.payment_terms }}
@@ -51,10 +56,18 @@ export default {
       });
     });
 
+    const formatDate = (timestamp) => {
+      // Преобразование Unix timestamp в объект Date
+      const date = new Date(timestamp * 1000); // Умножаем, потому что JavaScript использует миллисекунды
+      // Возвращаем форматированную строку даты
+      return date.toLocaleDateString('ru-RU'); // Используйте нужную локаль
+    }
+
     return {
       store,
       isLoading,
       tenders,
+      formatDate
     };
   },
 };

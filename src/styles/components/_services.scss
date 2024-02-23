@@ -47,6 +47,19 @@
     margin-right: 0 !important;
     display: flex;
     flex-direction: column;
+    .name{
+      flex: 3;
+    }
+    p{
+      flex: 2;
+    }
+    .flex-1{
+      margin-top: 16px;
+      p{
+        margin: 0;
+        font-size: 14px;
+      }
+    }
     ul{
       flex: 1;
       li{
