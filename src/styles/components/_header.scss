@@ -41,15 +41,42 @@
               color: $main-color;
             }
           }
+          position: relative;
           & + li{
             margin-left: 20px;
           }
           &>span{
+            display: flex;
+            align-items: center;
             cursor: pointer;
+            gap: 4px;
             font-size: 16px;
             color: $grey-600;
             font-weight: 600;
             line-height: normal;
+            svg{
+              transition: 0.2s;
+            }
+            &.active{
+              svg{
+                transform: rotate(180deg);
+              }
+            }
+          }
+          .dropdown{
+            position: absolute;
+            background: white;
+            span{
+              padding: 10px;
+              display: block;
+              font-size: 16px;
+              font-weight: 500;
+              color: #485467;
+              cursor: pointer;
+              &.active{
+                color: $main-color;
+              }
+            }
           }
         }
       }

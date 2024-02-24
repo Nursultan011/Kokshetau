@@ -9,6 +9,11 @@
           </h1>
           <div class="sub__wrap">
             <div class="sub__nav">
+              <select v-model="selectedCategory" @change="select(selectedCategory)" name="" id="">
+                <option :value="category" v-for="(category, index) in Object.values(subsidiary)">
+                  {{ category.title.title }}
+                </option>
+              </select>
               <ul>
                 <li :class="{ 'active' : category.title.title == activeTab.title.title }" v-for="(category, index) in Object.values(subsidiary)" @click="select(category)">
                   {{ category.title.title }}
@@ -27,6 +32,30 @@
                   <img src="../assets/images/pdf2.svg" alt="">
                   <span>
                     {{ parseFile(item.file_uri, 'name') }}
+                  </span>
+                </a>
+                <a :href="parseFile(item.first_file_uri, 'link')" target="_blank" class="pdf" v-if="item.first_file_uri && item.first_file_uri !== '[]'">
+                  <img src="../assets/images/pdf2.svg" alt="">
+                  <span>
+                    {{ parseFile(item.first_file_uri, 'name') }}
+                  </span>
+                </a>
+                <a :href="parseFile(item.second_file_uri, 'link')" target="_blank" class="pdf" v-if="item.second_file_uri && item.second_file_uri !== '[]'">
+                  <img src="../assets/images/pdf2.svg" alt="">
+                  <span>
+                    {{ parseFile(item.second_file_uri, 'name') }}
+                  </span>
+                </a>
+                <a :href="parseFile(item.third_file_uri, 'link')" target="_blank" class="pdf" v-if="item.third_file_uri && item.third_file_uri !== '[]'">
+                  <img src="../assets/images/pdf2.svg" alt="">
+                  <span>
+                    {{ parseFile(item.third_file_uri, 'name') }}
+                  </span>
+                </a>
+                <a :href="parseFile(item.fourth_file_uri, 'link')" target="_blank" class="pdf" v-if="item.fourth_file_uri && item.fourth_file_uri !== '[]'">
+                  <img src="../assets/images/pdf2.svg" alt="">
+                  <span>
+                    {{ parseFile(item.fourth_file_uri, 'name') }}
                   </span>
                 </a>
                 <div class="html" v-html="item.description"></div>

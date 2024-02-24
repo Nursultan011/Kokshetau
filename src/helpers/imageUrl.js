@@ -18,6 +18,7 @@ export const getIcon = (event) => {
 
 export const parseFile = (event, name) => {
   try {
+    const baseUrl = process.env.VUE_APP_BASE_URL_DEFAULT;
     const parsedArray = JSON.parse(event);
 
     if(name == 'link'){
@@ -32,4 +33,3 @@ export const parseFile = (event, name) => {
     return "";
   }
 }
-
