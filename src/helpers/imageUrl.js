@@ -16,3 +16,20 @@ export const getIcon = (event) => {
   }
 }
 
+export const parseFile = (event, name) => {
+  try {
+    const parsedArray = JSON.parse(event);
+
+    if(name == 'link'){
+      return `${baseUrl}storage/${parsedArray[0].download_link}`;
+      // return parsedArray.map(item => `${baseUrl}storage/${item.download_link}`);
+    }else if(name == 'name'){
+      return parsedArray[0].original_name;
+      // return parsedArray.map(item => `${item.original_name}`);
+    }
+  } catch (e) {
+    console.log("Ошибка при разборе JSON: ", e);
+    return "";
+  }
+}
+
