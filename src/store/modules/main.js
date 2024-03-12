@@ -10,7 +10,8 @@ const state = {
   news: null,
   news_id: null,
   subsidiary: null,
-  tenders: null
+  tenders: null,
+  consumer: null,
 };
 
 const getters = {};
@@ -165,6 +166,21 @@ const actions = {
       console.log('Ошибка', error);
       throw error;
     }
+  },
+  async getConsumer({ commit }) {
+    try {
+      axiosInstance.defaults.headers.common['Accept-Language'] = localStorage.getItem('lang') || 'ru';
+
+      const response = await axiosInstance.get('consumer_info/');
+
+      if (response.data) {
+        commit('setConsumer', response.data);
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log('Ошибка', error);
+      throw error;
+    }
   }
 };
 
@@ -195,6 +211,9 @@ const mutations = {
   },
   setTenders(state, data){
     state.tenders = data;
+  },
+  setConsumer(state, data){
+    state.consumer = data;
   }
 };
 

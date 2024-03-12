@@ -46,6 +46,11 @@ const routes = [
     name: 'contacts',
     component: () => import('../pages/contacts.vue')
   },
+  {
+    path: '/consumer',
+    name: 'consumer',
+    component: () => import('../pages/consumer.vue')
+  },
 ]
 
 const router = createRouter({

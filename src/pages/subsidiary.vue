@@ -69,11 +69,12 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useStore } from "vuex";
 import Loader from '@/components/global/Loader.vue';
 import { useRoute } from 'vue-router';
 import { parseFile } from "@/helpers/imageUrl";
+import { useI18n } from "vue-i18n";
 
 export default {
   components: { Loader },
@@ -81,6 +82,8 @@ export default {
     const route = useRoute();
     const store = useStore();
     const isLoading = ref(true);
+
+    const { locale } = useI18n({ useScope: "global" });
 
     const subsidiary = computed(() => store.state.main.subsidiary.data);
 
@@ -94,6 +97,19 @@ export default {
         }
       });
     });
+
+
+    watch(locale, async (val) => {
+      isLoading.value = true;
+
+      await store.dispatch("main/getSubsidiaryId", route.params.id).then((res) => {
+        isLoading.value = false;
+        if (subsidiary.value && Object.values(subsidiary.value).length > 0) {
+          activeTab.value = Object.values(subsidiary.value)[0];
+        }
+      });
+    });
+
 
     const select = (data) => {
       activeTab.value = data;

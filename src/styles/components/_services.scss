@@ -76,6 +76,48 @@
   }
 }
 
+.consumer{
+  .pdf{
+    margin-top: 20px;
+  }
+  .contacts-table{
+    margin-top: 25px;
+    width: 100%;
+    border-collapse: collapse;
+    &-wrap{
+      overflow: auto;
+      width: 100%;
+    }
+    th{
+      background: #F9FAFB;
+      padding: 13px 24px;
+      border: 1px solid #EAECF0;
+      td{
+        font-size: 12px;
+        font-weight: 500;
+        color: #475467;
+        background: #F9FAFB;
+      }
+      &:first-child{
+        // border-radius: 12px 0 0 0;
+      }
+      &:last-child{
+        // border-radius: 0 12px 0 0;
+      }
+    }
+    tr{
+      td{
+        border: 1px solid #EAECF0;
+        padding: 13px 24px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #475467
+      }
+    }
+  }
+}
+
 .sub{
   &__inner{
     padding: 32px 0;
@@ -119,6 +161,20 @@
       color: $black-color;
       font-weight: 600;
       line-height: 38px;
+    }
+    .p2{
+      color: #475467;
+      font-size: 18px;
+      line-height: 28px;
+      font-weight: 400;
+      ol{
+        padding-left: 20px;
+        li{
+          & + li{
+            margin-top: 8px;
+          }
+        }
+      }
     }
     .wrap{
       margin-top: 20px;

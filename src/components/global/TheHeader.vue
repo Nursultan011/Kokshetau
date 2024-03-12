@@ -1,11 +1,11 @@
 <template>
-  <header v-if="!isLoading" class="header">
+  <header v-if="!isLoading" class="header" :class="{'header-mobile' : isMenuOpen}">
     <div class="container">
       <div class="header__inner">
         <router-link to="/" class="logo">
           <img src="@/assets/images/logo.svg" alt="" />
         </router-link>
-        <nav>
+        <nav :class="{'nav-mobile' : isMenuOpen }">
           <ul>
             <li v-for="(item, i) in menu" :key="i" :class="{'active': route.path == item.link || route.path.includes('subsidiary') && item.dropdown}">
               <span v-if="!item.dropdown" @click="redirect(item.link)">{{ t(item.name) }}</span>
@@ -168,6 +168,7 @@ export default {
       }
 
       activeDropdown.value = false;
+      isMenuOpen.value = false;
     };
 
     const openDropdownLang = () => {
@@ -180,6 +181,7 @@ export default {
 
     const changeLanguage = (lang) => {
       setI18nLanguage(lang);
+      isDropdownOpenLang.value = false;
     };
 
     onMounted(async () => {
