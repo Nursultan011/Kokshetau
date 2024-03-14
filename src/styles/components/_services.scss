@@ -80,39 +80,39 @@
   .pdf{
     margin-top: 20px;
   }
-  .contacts-table{
-    margin-top: 25px;
+  .contacts-table-wrap{
+    overflow: auto;
     width: 100%;
-    border-collapse: collapse;
-    &-wrap{
-      overflow: auto;
+    table{
+      margin-top: 25px;
       width: 100%;
-    }
-    th{
-      background: #F9FAFB;
-      padding: 13px 24px;
-      border: 1px solid #EAECF0;
-      td{
-        font-size: 12px;
-        font-weight: 500;
-        color: #475467;
+      border-collapse: collapse;
+      th{
         background: #F9FAFB;
-      }
-      &:first-child{
-        // border-radius: 12px 0 0 0;
-      }
-      &:last-child{
-        // border-radius: 0 12px 0 0;
-      }
-    }
-    tr{
-      td{
-        border: 1px solid #EAECF0;
         padding: 13px 24px;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        color: #475467
+        border: 1px solid #EAECF0;
+        td{
+          font-size: 12px;
+          font-weight: 500;
+          color: #475467;
+          background: #F9FAFB;
+        }
+        &:first-child{
+          // border-radius: 12px 0 0 0;
+        }
+        &:last-child{
+          // border-radius: 0 12px 0 0;
+        }
+      }
+      tr{
+        td{
+          border: 1px solid #EAECF0;
+          padding: 13px 24px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          color: #475467
+        }
       }
     }
   }

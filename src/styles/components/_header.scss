@@ -102,6 +102,8 @@
               font-weight: 500;
               color: #485467;
               cursor: pointer;
+              overflow: hidden;
+              text-overflow: ellipsis;
               &.active{
                 color: $main-color;
               }

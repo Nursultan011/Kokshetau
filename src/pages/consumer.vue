@@ -103,6 +103,7 @@
                   </span>
                 </a>
                 <div class="html" v-html="item.description"></div>
+                <div class="contacts-table-wrap" v-if="item.available_capacity_table" v-html="item.available_capacity_table"></div>
               </div>
               <div class="contacts-table-wrap">
                 <table class="contacts-table" v-if="activeTab.contacts">
