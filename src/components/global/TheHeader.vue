@@ -1,9 +1,9 @@
 <template>
   <header v-if="!isLoading" class="header" :class="{'header-mobile' : isMenuOpen}">
-    <div class="container-fluid">
+    <div class="container">
       <div class="header__inner">
         <router-link to="/" class="logo">
-          <img src="@/assets/images/logo.svg" alt="" />
+          <img src="@/assets/images/logo2.png" alt="" />
         </router-link>
         <nav :class="{'nav-mobile' : isMenuOpen }">
           <ul>
