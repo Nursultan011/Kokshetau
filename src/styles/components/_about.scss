@@ -189,3 +189,46 @@
     }
   }
 }
+
+@media (max-width: 768px){
+  .advantages{
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+  
+  .art{
+    &__inner{
+      flex-wrap: wrap;
+    }
+    &__inner{
+      padding: 64px 0;
+    }
+    &__block{
+      width: 100%;
+      flex-wrap: wrap;
+      .content{
+        width: 100%;
+      }
+      & > img{
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .licenses-block{
+    &__card{
+      width: 100%;
+    }
+  }
+
+  .maps{
+    &__inner{
+      padding: 64px 0;
+    }
+    &__inner{
+      padding: 64px 0;
+    }
+  }
+}

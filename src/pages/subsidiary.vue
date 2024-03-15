@@ -4,7 +4,15 @@
     <section class="sub">
       <div class="container">
         <div class="sub__inner">
-          <h1 class="title">
+          <h1 class="title" v-if="title" v-for="(item, i) in title" :key="i">
+            <span v-if="item.id == $route.params.id && item.title">
+              {{ item.title }}
+            </span>
+            <span v-else>
+              {{$t('subsidiaries')}}
+            </span>
+          </h1>
+          <h1 class="title" v-else>
             {{$t('subsidiaries')}}
           </h1>
           <div class="sub__wrap">
@@ -87,6 +95,8 @@ export default {
 
     const subsidiary = computed(() => store.state.main.subsidiary.data);
 
+    const title = computed(() => store.state.main.main.data.subsidiaries);
+
     const activeTab = ref({});
 
     onMounted(async () => {
@@ -121,7 +131,8 @@ export default {
       subsidiary,
       select,
       activeTab,
-      parseFile
+      parseFile,
+      title
     };
   },
 };
