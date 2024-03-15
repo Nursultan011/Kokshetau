@@ -1,13 +1,13 @@
 <template>
   <header v-if="!isLoading" class="header" :class="{'header-mobile' : isMenuOpen}">
-    <div class="container">
+    <div class="container-fluid">
       <div class="header__inner">
         <router-link to="/" class="logo">
           <img src="@/assets/images/logo.svg" alt="" />
         </router-link>
         <nav :class="{'nav-mobile' : isMenuOpen }">
           <ul>
-            <li v-for="(item, i) in menu" :key="i" :class="{'active': route.path == item.link || route.path.includes('consumer') && item.dropdown}">
+            <li v-for="(item, i) in menu" :key="i" :class="{'active': route.path == item.link || route.path.includes('subsidiary') && item.dropdown}">
               <span v-if="!item.dropdown" @click="redirect(item.link)">{{ t(item.name) }}</span>
               <span v-else @click="activeDropdown = !activeDropdown" :class="{'active' : activeDropdown === true}">
                 {{ t(item.name) }}
@@ -16,18 +16,18 @@
                 </svg>
               </span>
 
-              <!-- <div v-if="item.dropdown === true && subMenu && activeDropdown" class="dropdown">
+              <div v-if="item.dropdown === true && subMenu && activeDropdown" class="dropdown">
                 <span :class="{'active': route.path == item.link + drp.id}" @click="redirect(item.link + drp.id)" v-for="(drp, n) in subMenu" :key="n">
-                  {{ drp.content.title }}
+                  {{ drp.title }}
                 </span>
-              </div> -->
+              </div>
             </li>
           </ul>
         </nav>
         <div class="header__flex">
-          <div class="emblem">
+          <!-- <div class="emblem">
             <img src="../../assets/images/gerb.svg" alt="">
-          </div>
+          </div> -->
           <div class="header__language">
             <div
               class="language"
@@ -128,7 +128,7 @@ export default {
 
     const { t, locale } = useI18n({ useScope: "global" });
 
-    const subMenu = computed(() => store.state.main.consumer.data);
+    const subMenu = computed(() => store.state.main.main.data.subsidiaries);
 
     const menu = ref([
       {
@@ -142,6 +142,11 @@ export default {
       {
         name: "subsidiary",
         link: "/consumer/",
+      },
+      {
+        name: "subsidiaries",
+        link: "/subsidiary/",
+        dropdown: true,
       },
       {
         name: "news",
@@ -184,7 +189,7 @@ export default {
     };
 
     onMounted(async () => {
-      await store.dispatch("main/getConsumer").then((res) => {
+      await store.dispatch("main/getMain").then((res) => {
         isLoading.value = false;
       });
     });

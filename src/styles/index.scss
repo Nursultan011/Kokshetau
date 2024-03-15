@@ -39,6 +39,12 @@ body {
   padding-left: 32px;
 }
 
+.container-fluid{
+	padding-left: 16px;
+	padding-right: 16px;
+	width: 100%;
+}
+
 @media (max-width: 767px) {
 	.container {
 		max-width: 100%;

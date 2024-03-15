@@ -5,7 +5,7 @@
       <div class="container">
         <div class="sub__inner">
           <h1 class="title">
-            Для потребителя
+            {{$t('subsidiaries')}}
           </h1>
           <div class="sub__wrap">
             <div class="sub__nav">
